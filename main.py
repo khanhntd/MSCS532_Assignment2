@@ -2,8 +2,9 @@ import random
 
 # quickSort will following the three steps:
 # Step 1: Choose the pivot (last element of the array)
-# Step 2: Divide the array into two parts (the left side will be smaller than the pivot
-# and the right side will be larger than the pivot)
+# Step 2: Partition the array, which includes splitting and reordering
+# the array so that all elements smaller than the pivot are on the left
+# and all elements larger than the pivot are on the right
 # Step 3: Repeat the same for the left side and right side
 # Time complexity: O(n log n) (O(n^2) when the array is sorted either in descending or ascending)
 # Space complexity: O(1)
@@ -19,14 +20,14 @@ def quickSort(array: list[int], low: int, high: int):
   # Perform the same implementation (choose pivot and divide) to the right side array
   quickSort(array, pivot + 1, high)
 
-# partitionArray will divide the array into two parts based on the pivot which can be chosen from median of median
+# partitionArray will partition the array based on the pivot which can be chosen from median of median
 # https://medium.com/@amit.desai03/median-of-median-on-medium-5ed518f17307; however, for simplicity, we will choose
 # the last element of the array. Afterwards, return the pivot index to divide and conquer
 def partitionArray(array: list[int], low: int, high: int) -> int:
   pivot = array[high]
 
   swapStartingIndex = low - 1
-  # Divide the array into two two parts
+  # Partition the array based on the pivot:
   # The left side will be smaller than the pivot
   # The right side will be larger than the pivot
   for currentIndex in range(low, high):
@@ -40,8 +41,8 @@ def partitionArray(array: list[int], low: int, high: int) -> int:
   return swapStartingIndex + 1
 
 # mergeSort will following the two steps:
-# Step 1: Divide the array into smaller sub-arrays
-# Step 2: Sort, merge the sub-arrays from the way up
+# Step 1: Divide the array into smaller sub-arrays until each subarray contains a single element
+# Step 2: Sort, merge the sub-arrays recursively
 # (since we are doing decreasing order)
 # Time complexity: O(nlogn)
 # Space complexity: O(n)
@@ -101,12 +102,13 @@ def printArray(array: list[int]):
     for i in range(len(array)):
         print(array[i], end=" ")
     print("\n")
-@profile
+
+
 def runningSort():
-  arr = generateArray(numberOfElements=200, isSort=False,sortIncreasing=False)
+  arr = generateArray(numberOfElements=10, isSort=False,sortIncreasing=False)
   print("Before sorting")
   printArray(arr)
-  mergeSort(arr, 0, len(arr) - 1)
+  quickSort(arr, 0, len(arr) - 1)
   print("After sorting ")
   printArray(arr)
 
