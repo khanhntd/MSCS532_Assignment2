@@ -100,11 +100,15 @@ def generateArray(numberOfElements: int, isSort: bool, sortIncreasing: bool) -> 
 def printArray(array: list[int]):
     for i in range(len(array)):
         print(array[i], end=" ")
-
-if __name__ =="__main__":
+    print("\n")
+@profile
+def runningSort():
   arr = generateArray(numberOfElements=200, isSort=False,sortIncreasing=False)
   print("Before sorting")
   printArray(arr)
   mergeSort(arr, 0, len(arr) - 1)
-  print("\nAfter sorting ")
+  print("After sorting ")
   printArray(arr)
+
+if __name__ =="__main__":
+  runningSort()
