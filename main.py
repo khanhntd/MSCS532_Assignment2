@@ -103,12 +103,12 @@ def printArray(array: list[int]):
         print(array[i], end=" ")
     print("\n")
 
-
+@profile
 def runningSort():
   arr = generateArray(numberOfElements=10, isSort=False,sortIncreasing=False)
   print("Before sorting")
   printArray(arr)
-  quickSort(arr, 0, len(arr) - 1)
+  mergeSort(arr, 0, len(arr) - 1)
   print("After sorting ")
   printArray(arr)
 
